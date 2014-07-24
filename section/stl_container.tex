@@ -1,0 +1,30 @@
+\section{STL(Container) / STL(コンテナ)}
+
+\subsection{vector}
+
+可変長サイズ配列．末尾方向にのみ拡張可能．
+
+\begin{itemize}
+	\item \func{vector(size\_type n, const T \&val = T())} \\
+	$n$個の\code{val}で初期化
+	\item \func{push\_back(const T \&val)} \\
+	末尾に\code{val}を挿入
+\end{itemize}
+
+\subsection{deque}
+
+\code{vector}の方が効率が良いが\code{deque}は両方向に拡張可能．
+
+\begin{itemize}
+	\item \func{push\_front(const T \&val)} \\
+	先頭に\code{val}を挿入
+	\item \func{push\_back(const T \&val)} \\
+	末尾に\code{val}を挿入
+\end{itemize}
+
+\subsection{string}
+
+文字列を扱うことができる．基本は\code{vector}と同じ．
+
+\lstinputlisting[caption=std::string]{src/stl_container/string.cpp}
+

@@ -1,0 +1,80 @@
+\section{math / 数学}
+
+\subsection{シンプソンの公式(合成)}
+$\int_a^b f(x) \mathrm{d}x$を$N$点で分割し近似する．最大誤差は，$-\frac{h^4}{180}(b-a)f^{(4)}(\xi)$ 程度．
+\lstinputlisting[caption=Simpson's rule]{src/math/simpson.cpp}
+
+\subsection{ユークリッド互除法}
+ユークリッド互除法
+$O(\log \max(a,b))$
+\lstinputlisting[caption=Eucledean algorithm]{src/math/gcd.cpp}
+
+\subsection{拡張ユークリッド互除法}
+拡張ユークリッド互除法
+$ax + by = gcd(a,b)$となる$x,y$を求める
+\lstinputlisting[caption=Extension Eucledean algorithm]{src/math/extgcd.cpp}
+
+\subsection{Prime}
+素数判定、約数の列挙、素因数分解
+\lstinputlisting[caption=Prime]{src/math/prime.cpp}
+
+\subsection{エラトステネスの篩}
+エラトステネスの篩
+$O(n \log\log n)$
+\lstinputlisting[caption=Eratosthenes]{src/math/eratosthenes.cpp}
+
+\subsection{行列の累乗}
+$A^k$を高速に求める
+$O(n^3 \log k)$
+\lstinputlisting[caption=Matrix]{src/math/matrix.cpp}
+
+\subsection{繰り返し二乗法}
+累乗を高速に求める
+$O(\log n)$
+\lstinputlisting[caption=Exponential]{src/math/exponential.cpp}
+
+\subsection{$m$項漸化式}
+繰り返し二乗法を利用すれば，どちらも$O(m^3 \log k)$
+\begin{itemize}
+	\item 定数項がない場合: $a_{n+m} = b_{m-1}a_{n+m-1} + \dots + b_0a_n$
+	\[
+		\left[\begin{array}{c} a_{n+m} \\ a_{n+m-1} \\ \vdots \\ a_{n+1} \end{array} \right]
+		= \left[\begin{array}{cccc}
+			b_{m-1} & \dots & b_1 & b_0 \\
+			1 &  &  &  \\
+			& \ddots &  &  \\
+			&  & 1 &
+		\end{array} \right]
+		\left[\begin{array}{c} a_{n+m-1} \\ a_{n+m-2} \\ \vdots \\ a_n \end{array} \right]
+	\]
+	\item 定数項がある場合: $a_{n+m} = b_{m-1}a_{n+m-1} + \dots + b_0a_n + c$
+	\[
+		\left[\begin{array}{c} a_{n+m} \\ a_{n+m-1} \\ \vdots \\ a_{n+1} \\ 1 \end{array} \right]
+		= \left[\begin{array}{ccccc}
+			b_{m-1} & \dots & b_1 & b_0 & c \\
+			1 &  &  &  & \\
+			& \ddots &  &  & \\
+			&  & 1 &  & \\
+			&  &  &  & 1 \\
+		\end{array} \right]
+		\left[\begin{array}{c} a_{n+m-1} \\ a_{n+m-2} \\ \vdots \\ a_n \\ 1 \end{array} \right]
+	\]
+\end{itemize}
+
+\subsection{合同式の性質}
+\begin{itemize}
+	\item $a \equiv a \pmod{p}$
+	\item $a \equiv b \pmod{p} \Rightarrow b \equiv a \pmod{p}$
+	\item $a \equiv b \pmod{p},~ b \equiv c \pmod{p} \Rightarrow a \equiv c \pmod{p}$
+	\item $a \equiv b \pmod{p},~ c \equiv d \pmod{p} \Rightarrow a+c \equiv b+d \pmod{p}$
+	\item $a \equiv b \pmod{p},~ c \equiv d \pmod{p} \Rightarrow a-c \equiv b-d \pmod{p}$
+	\item $a \equiv b \pmod{p},~ c \equiv d \pmod{p} \Rightarrow ac \equiv bd \pmod{p}$
+	\item $a \equiv b \pmod{p} \Rightarrow a^k \equiv b^k \pmod{p}$
+	\item $ka \equiv kb \pmod{p} \Rightarrow a \equiv b \pmod{\frac{p}{\gcd(k,p)}}$
+\end{itemize}
+
+\subsection{フェルマーの小定理}
+$p$を素数，$a$を$p$で割り切れない自然数とすると，
+\[
+	a^{p-1} \equiv 1 \pmod{p} \mbox{または}~ a^{p} \equiv a \pmod{p}.
+\]

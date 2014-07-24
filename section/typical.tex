@@ -1,0 +1,64 @@
+\section{typical / 典型問題}
+
+\subsection{最長共通部分列問題}
+最長共通部分文字列
+二つの文字列の長さn,m
+$O(nm)$
+\lstinputlisting[caption=最長共通部分文字列]{src/typical/lcs.cpp}
+
+\subsection{分割数}
+n個の互いに区別できない品物を,m個以下に分割する総数を求める．
+$O(nm)$
+\lstinputlisting[caption=分割数]{src/typical/nop.cpp}
+
+
+\subsection{Asteroids}
+問題：
+Asteroids(POJ No.3041)\\
+NxNの格子状にK個の小惑星があります。小惑星iの位置は(Ri, Ci)にあります。縦または横一直線上の小惑星をすべて一発のビームで破壊できる強力な武器があり、これを用いてすべての小惑星を破壊するための必要な最小の発射回数を求めなさい。\\
+1 ≦ N ≦ 500\\
+1 ≦ K ≦ 10000\\
+1 ≦ R, C ≦ N\\
+
+解法：
+これは最小点カバーとなり2部グラフの場合は効率的にとくことができる。
+\lstinputlisting[caption=Asteroids]{src/typical/asteroids.cpp}
+
+\subsection{UnionFind}
+問題：
+N匹の動物がいて、1,2,...,Nと番号がつけられており、動物は全て3つの種類A、B、Cのいずれかです。AはBを食べ、BはCを食べ、CはAを食べる。次の2種類の情報が順番にk個与えられる。\\
+1. xとyは同じ種類\\
+2. xはyを食べる\\
+これらは全て正しいとは限らない。以前に与えられた情報と矛盾する情報やx、yが正しい番号でないような正しくない情報が与えられる可能性がある。K個の情報のうち、そのような情報の個数を出力せよ。\\
+1 ≦ N ≦ 50000\\
+0 ≦ K ≦ 100000\\
+
+解法：
+各動物について３つの要素i-A, i-B, i-Cを作り、3xN個の要素でのUnion-Findを作る。\\
+・i-xは「iが種類xである場合」を表す。\\
+・各グループはそれらが全て同時に起こることが分かっていることを示す。\\
+
+例えばi-Aとj-Bが同じグループである場合、iが種類Aならばjは必ず種類Bであり、jが種類Bならばiは必ず種類Aであることを示している。そのため以下を行えばよいことが分かる。\\
+タイプ１：xとyが同じ種類 →　「x-Aとy-A」「x-Bとy-B」「x-Cとy-C」の3つのペアを併合\\
+タイプ２：xはyを食べる　→　「x-Aとy-B」「x-Bとy-C」「x-Cとy-A」の3つのペアを併合\\
+これらの前に矛盾が起きているかのチェックを行う\\
+例えばタイプ１の場合、x-Aとy-Bまたはy-Cが同じグループでないかなどをチェックする。\\
+
+
+\lstinputlisting[caption=UnionFind]{src/typical/unionfind.cpp}
+
+
+\subsection{BubbleSort}
+バブルソートの交換回数\\
+BITを用いる。
+\lstinputlisting[caption=UnionFind]{src/typical/bubblesort.cpp}
+
+\subsection{Roadblocks}
+2番目の最短路を求める。
+\lstinputlisting[caption=Roadblocks]{src/typical/roadblocks.cpp}
+
+\subsection{fibonacci}
+フィボナッチ数を行列の累乗により高速に求める。
+\lstinputlisting[caption=Roadblocks]{src/typical/fib.cpp}
+
+

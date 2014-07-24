@@ -1,0 +1,15 @@
+\section{structure / データ構造}
+\subsection{BIT}
+和の計算。　それぞれ$O(\log n)$
+iの最後の1のビットは \code{i\&-i} で求められる。
+\lstinputlisting[caption=BIT]{src/structure/binary_indexed_tree.cpp}
+
+\subsection{Segment Tree}
+Range Max Query
+最大、最小、合計などを求めるクエリを$O(\log n)$で処理できる。
+\lstinputlisting[caption=Segment Tree]{src/structure/segment_tree.cpp}
+
+\subsection{Union Find}
+要素の併合、同じ集合に属するかの判定を高速に行える。
+閉路の検出などにも使える。
+\lstinputlisting[caption=Union Find]{src/structure/union_find.cpp}

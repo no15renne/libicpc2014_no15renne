@@ -1,0 +1,51 @@
+\section{others / その他}
+
+\subsection{サイコロ}
+\lstinputlisting[caption=dice]{src/others/dice.cpp}
+
+\subsection{座標圧縮}
+始点、終点それぞれの配列を引数で受け取り、
+x1,x2を座標圧縮圧縮し、座標圧縮した際の幅を返す。
+\lstinputlisting[caption=compress]{src/others/compress.cpp}
+
+\subsection{いもす法}
+区間や範囲に対して0次関数(定数)を重ねるような場合，区間の始点，終点のみ値を記憶することで
+途中の処理を簡約化する．
+BITと組み合わせることで，色々なことができるようになる．
+
+\subsection{鳩の巣原理}
+$n$個の物を$m$個の箱に入れるには，$n>m$であれば少なくとも1つの箱は1個より多い物がある．
+
+\subsection{しゃくとり法}
+区間に対する演算または条件$f$について，区間$[a,b)$内に存在する$f$が極小/極大となる区間を列挙する．
+$O(b-a)$
+\begin{itemize}
+	\item $f$を満たさなければ，右端を進めて区間を広げる
+	\item $f$を満たしていれば，左端を進めて区間を狭める
+\end{itemize}
+
+\subsection{区間総和}
+数列$a_1,\ldots,a_n$に対して，予め$O(n)$で区間和を求めておくことで，
+任意の小区間の和を$O(1)$で計算可能
+
+\subsection{半分全列挙}
+全部の組み合わせは計算量的に無理だが，半分の組み合わせは列挙可能であれば，それらを組み合わせることで全部の組み合わせを列挙することができる．
+
+\subsection{2-SAT}
+\[
+	(expr_1)\land(expr_2)\land\dots\land(expr_n)
+\]
+の形の論理式で，$expr_i$が$p_1 \lor p_2$の形をしているものについて，
+強連結成分分解を利用することで$O(\mbox{変数のサイズ})$で充足可能か不可能を判定できる．
+
+\subsection{包除原理}
+$A_i$を集合とした時，
+\[
+	\left| \cup A_i \right| = \sum_{1 \le i \le m} \left|A_i\right|
+		- \sum_{1 \le i < j \le m} \left| A_i \cap A_j \right| \dots
+		(-1)^{m+1} \sum \left| A_1 \cap A_2 \cap \dots \cap A_m \right|.
+\]
+$\left| A_i \cap A_j \cap \dots \cap A_k \right|$の計算に$O(f)$かかるとすれば，$O(2^mf)$
+
+\subsection{ポリアの数え上げ定理}
+対称性(回転，反転)のある数え上げ問題において，パターンを全て同じ回数ずつ数え，最後に重複している回数で割ることで，数え上げることができる．

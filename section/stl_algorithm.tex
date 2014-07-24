@@ -1,0 +1,97 @@
+\section{STL(algorithm) / STL(汎用アルゴリズム)}
+計算量の表記では以下のノーテーションを用いる．
+\begin{itemize}
+	\item $n = |[first,last)|~or~|[first1,last1)|$
+	\item $m = |[first2,last2)|$
+\end{itemize}
+
+省略表記として以下のノーテーションを用いる\\
+Iterator:=\textit{itr}, Input:=\textit{I}, Output:=\textit{O}, Forward:=\textit{F},
+Bidirectorical:={BD}, RandomAccess:=\textit{RA}, Predicate:=\textit{Pred}, Binary:=\textit{B},
+Unary:~\textit{U}, Operation:=\textit{Op}, first:=\textit{fir}, last:=\textit{lst}
+
+\subsection{非可変列アルゴリズム}
+これらのアルゴリズムはコンテナを直接変更しない．
+\begin{itemize}
+	\item \func{Function for\_each(Iitr fir, Iitr lst, Function f);}\\
+		$[fir,lst)$に対して，\code{f(*iter)}を実行する．関数の結果(=戻り値)は無視される．
+		$O(n)$
+	\item \func{Iitr find(Iitr fir, Iitr lst, const T\& val);}
+	\item \func{Iitr find\_if(Iitr fir, Iitr lst, Pred pred)}\\
+		$[fir,lst)$を線形探索する．
+		$O(n)$
+	\item \func{Fitr1 find\_first\_of(Fitr1 fir1, Fitr1 lst1, Fitr2 fir2, Fitr2 lst2);}
+	\item \func{Fitr1 find\_first\_of(Fitr1 fir1, Fitr1 lst1, Fitr2 fir2, Fitr2 lst2, BPred pred);}\\
+		$[fir1,lst1)$を値域$[fir2,lst2)$で線形探索する．
+		$O(nm)$
+	\item \func{Fitr adjacent\_find(Fitr fir, Fitr lst);}
+	\item \func{Fitr adjacent\_find(Fitr fir, Fitr lst, BPred pred);}\\
+		$[fir,lst)$に連続した重複要素があるか線形探索する．
+		$O(n)$
+	\item \func{difference count(Iitr fir, Iitr lst, const T\& val);}
+	\item \func{difference count(Iitr fir, Iitr lst, Pred pred);}\\
+		$[fir,lst)$に含まれる\code{val}(または\code{f(*iter)}が\code{true}となる要素)の数を調べる．
+		$O(n)$
+	\item \func{pair<Iitr1,Iitr2> mismatch(Iitr1 fir1, Iitr1 lst1, Iitr2 fir1);}
+	\item \func{pair<Iitr1,Iitr2> mismatch(Iitr1 fir1, Iitr1 lst1, Iitr2 fir1, BPred pred);}\\
+		$[fir1,lst1)$の要素と$[fir2,\infty)$の要素を順番に比較し，最初に出現する一致しない要素の位置を調べる．
+		$O(n)$
+	\item \func{bool equal(Iitr1 fir1, Iitr1 lst1, Iitr2 fir1);}
+	\item \func{bool equal(Iitr1 fir1, Iitr1 lst1, Iitr2 fir1, BPred pred);}\\
+		$[fir1,lst1)$と$fir2$から始まる大きさ$lst1-fir1$の値域に同じ要素が同じ順序で入っているか調べる．
+		$O(n)$
+	\item \func{Fitr1 search(Fitr1 fir1, Fitr1 lst1, Fitr2 fir2, Fitr2 lst2);}
+	\item \func{Fitr1 search(Fitr1 fir1, Fitr1 lst1, Fitr2 fir2, Fitr2 lst2, BPred pred);}\\
+		$[fir1,lst1)$に対して，部分列$[fir2,lst2)$が一番最初に現れる位置を探索する．
+		$O((n-m)m)$
+	\item \func{Fitr search\_n(Fitr fir, Fitr lst, Size count, const T\& val);}
+	\item \func{Fitr search\_n(Fitr fir, Fitr lst, Size count, const T\& val, BPred pred);}\\
+		$[fir,lst)$に$count(=m)$個の連続した\code{val}が含まれるかを線形探索する．
+		$O(nm)$
+	\item \func{Fitr find\_end(Fitr fir1, Fitr lst1, Fitr fir2, Fitr lst2);}
+	\item \func{Fitr find\_end(Fitr fir1, Fitr lst1, Fitr fir2, Fitr lst2, BPred pred);}\\
+		$[fir1,lst1)$に対して，部分列$[fir2,lst2)$が一番最後に現れる位置を探索する．
+		$O(nm)$
+\end{itemize}
+
+\subsection{可変列アルゴリズム}
+\begin{itemize}
+	\item \func{Oitr copy(Iitr fir1, Iitr fir2, Oitr fir1);}
+	\item \func{Bitr copy\_backward(Bitr fir1, Bitr fir2, Bitr lst2);}\\
+		$[fir1,lst1)$を$[fir2,lst2)$にコピーする．
+		$O(n)$
+	\item \func{void swap(T\& x, T\& y);}
+	\item \func{Fitr2 swap\_ranges(Fitr1 fir1, Fitr1 lst1, Fitr2 fir2);}\\
+		$x$と$y$($[fir1,lst1)$と$[fir2,lst2)$)を入れ替える．
+		$O(1), O(n)$
+	\item \func{Oitr transform(Iitr, fir, Iitr lst, Oitr res, Uop op);}\\
+		$[fir,lst)$の各要素に\code{op}を適用し，要素を生成する．
+		$O(n)$
+	\item \func{Oitr transform(Iitr1, fir, Iitr1 lst, Iitr2 fir2, Oitr res, Bop op);}\\
+		$[fir1, lst1)$と$[fir2,lst2)$の各要素に\code{op}を適用し，要素を生成する．
+		$O(n)$
+	\item \func{void replace(Fitr fir, Fitr lst, const T\& old\_val, const T\& new\_val);}
+	\item \func{void replace\_copy(Fitr fir, Fitr lst, Oitr res, const T\& old\_val, const T\& new\_val);}
+	\item \func{void replace\_if(Fitr fir, Fitr lst, Pred pred, const T\& new\_val);}
+	\item \func{void replace\_copy\_if(Fitr fir, Fitr lst, Oitr res, Pred pred, const T\& new\_val);}\\
+		$[fir, lst)$の\code{old\_val}または\code{Pred}を満たす要素を\code{new\_val}に置換する．
+		$O(n)$
+	\item \func{void fill(Fitr fir, Fitr lst, const T\& val);}
+	\item \func{void fill\_n(Oitr fir, Size n, const T\& val);}\\
+		$[fir,lst)$または$[fir,fir+n)$の全箇所に\code{val}を入れる．
+		$O(n)$
+	\item \func{void generate(Fitr fir, Fitr lst, Gen g);}
+	\item \func{void generate\_n(Fitr fir, Size n, Gen g);}
+		$[fir,lst)$または$[fir,fir+n)$の全箇所に関数オブジェクト\code{g}で生成した値を入れる．
+		$O(n)$
+	\item \func{Fitr remove(Fitr fir, Fitr lst, const T\& val);}
+	\item \func{Fitr remove\_copy(Iitr fir, Iitr lst, Oitr res, const T\& val);}
+	\item \func{Fitr remove\_if(Fitr fir, Fitr lst, Pred pred);}
+	\item \func{Fitr remove\_copy\_if(Iitr fir, Iitr lst, Oitr res, Pred pred);}\\
+		$[fir,lst)$内の\code{val}を除去し(ストレージは削除しない)，\code{val}を含まない範囲の末尾を示すイテレータを返す．
+		$O(n)$
+	\item \func{Itr unique(...);}\\
+		$[fir,last)$内の連続する重複要素を除去する．
+		$O(n)$
+\end{itemize}
+

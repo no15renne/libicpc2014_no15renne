@@ -1,0 +1,27 @@
+\section{checklist / チェックリスト}
+\begin{itemize}
+\item 構文解析の\code{pos++}の場所
+\item 論理和\code{||}の前半がtrueなら後半は実行されない
+\item 初期化忘れ
+\item MOD忘れ
+\item メモ化忘れ
+\item オーバーフロー
+\item 型指定なしでのビットシフトは32まで それ以上は\code{1LL<<40}等を使う
+\item \code{double a = 0,5}のようにピリオドのミスタイプ
+\item x,yが逆
+\item １オリジン
+\item グラフの自己ループの有無
+\item MOD指定がある場合、引き算する前にMODを足す \code{(ans+MOD-1)\%MOD}
+\item DPテーブルを再利用する場合毎ループごとにテーブルを初期化
+\item 同じ頂点同士で辺が2重にはいってこないか
+\item INFの見積りミス
+\item グラフの有向、無向
+\item 小数の出力形式
+\item \code{if}文等での中括弧をつけずに2行目以降を書いている。
+\item \func{getline}のあとで\code{cin>>string}とかする場合は\code{cin.ignore()}\\でも\func{getline}のあとに\func{getline}の場合は\func{ignore}つけるとバグる
+\item priority\_queueなどの比較関数内のreturn
+\item 構造体などのコンストラクタの引数の順番\\特にパラメータをたくさんもつダイクストラ
+\item ループ変数の被り
+\item 負の除算・剰余
+\item 入力はちゃんと読み込めているか
+\end{itemize}

@@ -1,0 +1,20 @@
+\section{string / 文字列}
+
+\subsection{再帰下降構文解析}
+四則演算の例
+\lstinputlisting[caption=再帰下降構文解析(四則演算)]{src/string/recursive_descent_parser.cpp}
+
+\subsection{ローリングハッシュ}
+$H(C)=(c_1b^{m-1}+c_2b^{m-2}+...+c_mb^0)\pmod h $
+
+$H(S[k+1..k+m])=(H(S[k..k+m-1])\times b-s_kb^m+s_{k+m})\pmod h$
+
+開始位置を右に一つ進めた部分文字列でのハッシュ値を求めることを繰り返せば、全ての場所に関するハッシュ値を$O(n)$で得ることができ、$O(n+m)$時間で文字列検索が行える。hを$2^{64}$にしたと考え64bit整数を用いると、modを取る操作を省くことができる。
+\lstinputlisting[caption=ローリングハッシュ]{src/string/rabin_karp.cpp}
+
+
+\subsection{トライ木}
+文字列集合を木として保持する。
+長さlの文字列の検索がO(l)。
+メモリを多く使うため、テストケースが複数ある場合はメモリの開放が必須。
+\lstinputlisting[caption=トライ木]{src/string/trie.cpp}

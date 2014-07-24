@@ -1,0 +1,20 @@
+\section{game / ゲーム}
+\subsection{Nim}
+石の山が$n$個あって、それぞれ$a_i$個の石を含んでいる。\\
+２人が交互に空でない山を１つ選び、そこから１個以上の石をとり、最後の石をとったら勝ちである。\\
+このとき先攻、後攻のどちらが勝つか。
+
+以下が成立する。\\
+$a_1~XOR~a_2~XOR~\ldots~XOR~a_n~\neq~0 \rightarrow$ 勝ちの状態\\
+$a_1~XOR~a_2~XOR~\ldots~XOR~a_n~=~0 \rightarrow$ 負けの状態\\
+これよりXORを計算し、０でなければ先攻の勝ち、０ならば後攻の勝ちとなる。\\
+負けの状態からは勝ちの状態にしかいけないこと、勝ちの状態からは常に負けの状態が作れることから証明できる。\\
+以下は先攻がAlice,後攻がBobの例
+\lstinputlisting[caption=Nim]{src/game/nim.cpp}
+
+\subsection{Grundy数}
+Grundy数を用いることで多くのゲームをNimに帰着できる。\\
+「今の状態から一手でいける状態のGrundy数に含まれていない最小の非負の整数が、今の状態のGrundy数」\\
+このGrundy数はNimの１つの山と似た性質を持つ。
+
+

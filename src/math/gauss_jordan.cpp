@@ -1,29 +1,26 @@
-typedef vector<double> Array;
-typedef vector<Array> Matrix;
-Array gauss_jordan (const Matrix &A, const Array &b) {
-    int n = A.size();
-    Matrix B(n, Array(n + 1));
-    for (int i = 0; i < n; i++) 
-        for (int j = 0; j < n; j++) B[i][j] = A[i][j];
-    for (int i = 0; i < n; i++) B[i][n] = b[i];
+typedef vector<double> Vector;
+typedef vector<Vector> Matrix;
 
-    for (int i = 0; i < n; i++) {
+Vector GaussJordan (Matrix A, const Vector &y) {
+    assert(A[0].size() == y.size());
+    int N = A.size();
+    for (int i = 0; i < N; i++) A[i].push_back(y[i]);
+    for (int i = 0; i < N; i++) {
         int pivot = i;
-        for (int j = i; j < n; j++) {
-            if (abs(B[i][j]) > abs(B[pivot][i])) pivot = j;
+        for (int j = i; j < N; j++) {
+            if (abs(A[i][j]) > abs(A[pivot][i])) pivot = j;
         }
-        swap(B[i], B[pivot]);
+        swap(A[i], A[pivot]);
         //no answer
-        if (abs(B[i][i]) < EPS) return Array();
-
-        for (int j = i + 1; j <= n; j++) B[i][j] /= B[i][i];
-        for (int j = 0; j < n; j++) {
+        if (abs(A[i][i]) < EPS) return Vector();
+        for (int j = i + 1; j <= N; j++) A[i][j] /= A[i][i];
+        for (int j = 0; j < N; j++) {
             if (i != j) {
-                for (int k = i + 1; k <= n; k++) B[j][k] -= B[j][i] * B[i][k];
+                for (int k = i + 1; k <= N; k++) A[j][k] -= A[j][i] * A[i][k];
             }
         }
     }
-    Array x(n);
-    for (int i = 0; i < n; i++) x[i] = B[i][n];
+    Vector x(N);
+    for (int i = 0; i < N; i++) x[i] = A[i][N];
     return x;
 }

@@ -1,3 +1,6 @@
+typedef double Number;
+typedef vector<Number> Array;
+typedef vector<Array> Matrix;
 const int MOD = 10000;
 
 Matrix Mul (Matrix A, Matrix B) {
@@ -15,7 +18,6 @@ Matrix Mul (Matrix A, Matrix B) {
     return C;
 }
 
-
 Matrix Pow (Matrix A, long long n) {
     assert(A.size() == A[0].size());
     int N = A.size();
@@ -28,6 +30,7 @@ Matrix Pow (Matrix A, long long n) {
     else 
         return n % 2 == 0 ? Pow(Mul(A, A), n/2) : Mul(A, Pow(A, n-1));
 }
+
 int Rank (Matrix A) {
     int M = A.size(), N = A[0].size();
     int r = 0;
@@ -52,3 +55,47 @@ int Rank (Matrix A) {
     return r;
 }
 
+struct LUinfo {
+  vector<Number> value;
+  vector<int> index;
+};
+//LU•ª‰ð(O(n^3))
+LUinfo LU_decomposition(Matrix A) {
+  const int N = A.size();
+  LUinfo data;
+  for (int i = 0; i < N; ++i) {
+    int pivot = i;
+    for (int j = i+1; j < N; ++j)
+      if (abs(A[j][i]) > abs(A[pivot][i])) pivot = j;
+    swap(A[pivot], A[i]);
+    data.index.push_back(pivot);
+    for(int j = i+1; j < N; ++j) {
+      A[j][i] /= A[i][i];
+      for(int k = i+1; k < N; ++k)
+        A[j][k] -= A[i][k] * A[j][i];
+      data.value.push_back(A[j][i]);
+    }
+  }
+  for(int i = N-1; i >= 0; --i) {
+    for(int j = i+1; j < N; ++j)
+      data.value.push_back(A[i][j]);
+    data.value.push_back(A[i][i]);
+  }
+  return data;
+}
+//data*x = b‚ð‰ð‚­O(n^2)
+Matrix LU_backsubstitution(const LUinfo &data, Matrix b) {
+  const int N = b.size();
+  int k = 0;
+  for (int i = 0; i < N; ++i){
+    swap(b[data.index[i]][0], b[i][0]);
+    for(int j = i+1; j < N; ++j)
+      b[j][0] -= b[i][0] * data.value[k++];
+  }
+  for (int i = N-1; i >= 0; --i) {
+    for (int j = i+1; j < N; ++j)
+      b[i][0] -= b[j][0] * data.value[k++];
+    b[i][0] /= data.value[k++];
+  }
+  return b;
+}
